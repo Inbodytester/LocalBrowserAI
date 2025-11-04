@@ -108,4 +108,4 @@ Click "Take Screenshot & Ask" and wait a few seconds for your local AI to respon
 ☕ Support My Work
 If you find this tool useful and want to support my journey from medic to maker, please consider buying me a coffee!
 
-👉 https://www.buymeacoffee.com/YOUR_PAGE_HERE
+👉 https://buymeacoffee.com/gabethevet
