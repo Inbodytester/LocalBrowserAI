@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "LM Studio Screenshot Helper",
+  "version": "1.0",
+  "description": "Takes a screenshot and asks a question to a local LM Studio model.",
+  "permissions": [
+    "activeTab",  // To take a screenshot of the current tab
+    "storage"     // To store data (good practice)
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*" // Allows this extension to talk to your Python server
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
