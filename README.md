@@ -2,6 +2,10 @@ This is the perfect place for these instructions! A README.md file is exactly wh
 
 You've captured all the essential steps. I've reorganized them into a clear, step-by-step README.md format that's easy to follow, adding a few crucial details (like installing the Python libraries) and using Markdown for clarity.
 
+
+DOWNLOAD FILES, ADD ALL FILES TO A FOLDER AND CREATE ANOTHER FOLDER AND ADD ALL FILES BUT SERVER.PY 
+
+
 Here is your revised README.md file:
 
 Local-VLM Screenshot Helper
@@ -31,9 +35,9 @@ Follow these steps in order to get the tool running.
 Step 1: Configure LM Studio (The "Brain")
 Download a Model: Open LM Studio. In the "Search" tab (🔍), download a multimodal ("VL" or "Vision-Language") model.
 
-Recommended: Qwen2-VL 30B (or similar size)
+Recommended: Qwen3-VL 30B (or similar size)
 
-Lighter alternatives: LLaVA 1.6 7B, Qwen2-VL 7B
+Lighter alternatives: LLaVA 1.6 7B, Qwen3-VL 7B
 
 Start the Server: Go to the "Server" tab (<->).
 
@@ -104,6 +108,7 @@ Click the Icon: Click the extension's icon in your toolbar.
 Ask Your Question: Type a question about the page (e.g., "Summarize this article," "What is this chart showing?") into the text box.
 
 Click "Take Screenshot & Ask" and wait a few seconds for your local AI to respond!
+
 
 ☕ Support My Work
 If you find this tool useful and want to support my journey from medic to maker, please consider buying me a coffee!
