@@ -1,12 +1,4 @@
-This is the perfect place for these instructions! A README.md file is exactly what you need to guide users.
-
-You've captured all the essential steps. I've reorganized them into a clear, step-by-step README.md format that's easy to follow, adding a few crucial details (like installing the Python libraries) and using Markdown for clarity.
-
-
 DOWNLOAD FILES, ADD ALL FILES TO A FOLDER AND CREATE ANOTHER FOLDER AND ADD ALL FILES BUT SERVER.PY 
-
-
-Here is your revised README.md file:
 
 Local-VLM Screenshot Helper
 This project gives you a simple Chrome Extension that lets you take a screenshot of your current webpage and ask questions directly to a local multimodal AI model (like Qwen2-VL or LLaVA) running in LM Studio.
