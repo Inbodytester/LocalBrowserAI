@@ -2,11 +2,10 @@
 <html data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <title>LocalBrowserAI</title>
+  <title>LocalBrowserAI — Side Panel</title>
   <link rel="stylesheet" href="styles.css">
-  <style>body { width: 360px; }</style>
 </head>
-<body>
+<body class="sidepanel-body">
 
   <!-- ── Header ── -->
   <div class="header">
@@ -14,8 +13,7 @@
     <span class="title">LocalBrowserAI</span>
     <div class="header-right">
       <button id="themeToggle" class="icon-btn" title="Toggle dark/light mode">☾</button>
-      <button id="pinBtn" class="icon-btn" title="Pin to side panel">📌</button>
-      <button id="closeBtn" class="icon-btn" title="Close">✕</button>
+      <button id="closePanelBtn" class="icon-btn" title="Close side panel">✕</button>
     </div>
   </div>
 
@@ -53,6 +51,6 @@
     </div>
   </div>
 
-  <script src="popup.js"></script>
+  <script src="sidepanel.js"></script>
 </body>
 </html>

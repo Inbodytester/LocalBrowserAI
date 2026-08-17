@@ -1,4 +1,4 @@
-/*  LocalBrowserAI — Popup Script  */
+/*  LocalBrowserAI — Side Panel Script  */
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Theme
@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Listeners
   document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-  document.getElementById("pinBtn").addEventListener("click", pinToSidePanel);
-  document.getElementById("closeBtn").addEventListener("click", () => window.close());
+  document.getElementById("closePanelBtn").addEventListener("click", closePanel);
   document.getElementById("historyBtn").addEventListener("click", showHistory);
   document.getElementById("modeToggle").addEventListener("click", toggleMode);
   document.getElementById("sendButton").addEventListener("click", sendMessage);
@@ -92,23 +91,17 @@ function setThemeIcon(t) {
   b.title = t === "dark" ? "Switch to light mode" : "Switch to dark mode";
 }
 
-/* ── Pin / Side Panel ── */
+/* ── Close Side Panel ── */
 
-async function pinToSidePanel() {
+async function closePanel() {
   try {
-    // Ensure side panel is enabled
-    await chrome.sidePanel.setOptions({ enabled: true, path: "sidepanel.html" });
-    // Get current window ID — must resolve before opening
-    const win = await chrome.windows.getCurrent();
-    // Open side panel directly (preserves user gesture from click handler)
-    await chrome.sidePanel.open({ windowId: win.id });
-    setTimeout(() => window.close(), 200);
-  } catch (e) {
-    console.error("Pin failed, trying background fallback:", e);
+    // chrome.sidePanel.close() requires Chrome 126+
+    await chrome.sidePanel.close();
+  } catch {
+    // Fallback: disable then re-enable so next pin reopens
     try {
-      await chrome.runtime.sendMessage({ action: "open_side_panel" });
-      setTimeout(() => window.close(), 200);
-    } catch (e2) { console.error("Fallback also failed:", e2); }
+      await chrome.sidePanel.setOptions({ enabled: false });
+    } catch { window.close(); }
   }
 }
 
@@ -214,6 +207,7 @@ async function showHistory() {
       .map((e) => {
         const t = new Date(e.timestamp).toLocaleString();
         const p = e.prompt.length > 60 ? e.prompt.slice(0, 60) + "…" : e.prompt;
+        // Content is escaped via esc() — safe innerHTML
         return `<div class="history-entry" data-id="${e.id}">
           <div class="history-entry-prompt">${esc(p)}</div>
           <div class="history-entry-meta">${t} — ${esc(e.title || e.url || "")}</div>

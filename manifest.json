@@ -1,18 +1,27 @@
 {
   "manifest_version": 3,
-  "name": "LM Studio Screenshot Helper",
-  "version": "1.0",
-  "description": "Takes a screenshot and asks a question to a local LM Studio model.",
+  "name": "LocalBrowserAI",
+  "version": "2.0",
+  "description": "Local Private Chrome Extension — Ask AI questions with 100% privacy.",
   "permissions": [
-    "activeTab",  // To take a screenshot of the current tab
-    "storage"     // To store data (good practice)
+    "activeTab",
+    "storage",
+    "sidePanel",
+    "nativeMessaging",
+    "scripting"
   ],
   "host_permissions": [
-    "http://localhost:8000/*" // Allows this extension to talk to your Python server
+    "http://localhost:8000/*"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "icons": {
     "128": "icon.png"
