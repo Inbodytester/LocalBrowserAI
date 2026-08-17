@@ -16,6 +16,13 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger("localbrowserai")
 
 # ── Configuration from environment ──
+# Load .env before reading any config vars
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 LM_STUDIO_BASE_URL = os.getenv("LM_STUDIO_BASE_URL", "http://localhost:1234/v1")
 LM_STUDIO_API_KEY = os.getenv("LM_STUDIO_API_KEY", "lm-studio")
 LM_STUDIO_MODEL = os.getenv("LM_STUDIO_MODEL", "local-model")
@@ -103,14 +110,6 @@ async def ask_model(query: Query):
 # ── Run ──
 
 if __name__ == "__main__":
-    # Load .env file if python-dotenv is available (optional, non-fatal)
-    try:
-        from dotenv import load_dotenv
-        load_dotenv()
-        logger.info("Loaded .env file")
-    except ImportError:
-        pass
-
     logger.info("Starting server on %s:%s", SERVER_HOST, SERVER_PORT)
     logger.info("CORS origins: %s", CORS_ORIGINS)
     uvicorn.run(app, host=SERVER_HOST, port=SERVER_PORT)
