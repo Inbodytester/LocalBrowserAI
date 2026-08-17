@@ -1,3 +1,20 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db

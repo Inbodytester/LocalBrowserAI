@@ -99,8 +99,23 @@ async function closeSidePanel() {
 
 async function saveHistory(entry) {
   const { history = [] } = await chrome.storage.local.get("history");
+
+  // Truncate long responses in history to keep storage manageable
+  if (entry.response && entry.response.length > 2000) {
+    entry.response = entry.response.substring(0, 2000) + "… [truncated]";
+  }
+  // Drop large image data if accidentally stored
+  delete entry.image;
+
   history.unshift(entry);
   if (history.length > 100) history.length = 100;
+
+  // Check total storage size (~8 MB safety limit, chrome.storage.local has 10 MB)
+  const sizeEstimate = JSON.stringify(history).length;
+  if (sizeEstimate > 8_000_000) {
+    history.length = Math.max(10, Math.floor(history.length * 0.7));
+  }
+
   await chrome.storage.local.set({ history });
   return { status: "saved" };
 }
