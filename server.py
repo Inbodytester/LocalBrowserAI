@@ -8,6 +8,7 @@ import os
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional
 from pydantic import BaseModel, Field, field_validator
 from openai import OpenAI
 
@@ -51,8 +52,8 @@ client = OpenAI(base_url=LM_STUDIO_BASE_URL, api_key=LM_STUDIO_API_KEY)
 
 class Query(BaseModel):
     prompt: str = Field(..., min_length=1, max_length=MAX_PROMPT_LENGTH)
-    image: str = Field(default="", max_length=MAX_IMAGE_SIZE_MB * 1_048_576 * 4 // 3)  # base64 ≈ 4/3 of raw
-    text: str = Field(default="", max_length=MAX_TEXT_LENGTH)
+    image: Optional[str] = Field(default=None, max_length=MAX_IMAGE_SIZE_MB * 1_048_576 * 4 // 3)
+    text: Optional[str] = Field(default=None, max_length=MAX_TEXT_LENGTH)
 
     @field_validator("prompt")
     @classmethod
@@ -63,7 +64,7 @@ class Query(BaseModel):
 
     @field_validator("image")
     @classmethod
-    def image_must_be_base64(cls, v: str) -> str:
+    def image_must_be_base64(cls, v: Optional[str]) -> Optional[str]:
         if v and not all(c in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n" for c in v[:100]):
             raise ValueError("image must be valid base64")
         return v
